@@ -68,9 +68,16 @@ void tutorial(){
 	printf("\t\t   ╚═╝    ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚══════╝	\n");
                                                               
 	printf("\n");
+	
+	printf("\t\t-----> tutorial para os niveis facil, medio, dificil e rapazzz: \n");
 	printf("\t\t* - o sudoku e uma tabela que deve ser preenchida por numeros de 1 a 9\n");
 	printf("\t\t* - o sudoku nao deve ter numeros repitidos na mesma linha e nem na mesma coluna\n");
 	printf("\t\t* - o sudoku nao pode ter numeros repitidos dentro de um bloco 3x3\n");
+	printf("\n\t\t------> para o nivel de olho fechado:\n");
+	printf("\t\t* - as mesmas regras de um sudoku normal(algumas excessoes abaixo)\n");
+	printf("\t\t* - aqui devese colocar numeros de 1 a 6 e os blocos devem ser de 1 a 6\n");
+	printf("\n\t\t-------> para o nivel inferno\n");
+	printf("\t\t...\n");
 }
 
 void creditos(){
@@ -94,6 +101,20 @@ void creditos(){
 	printf("\t\t\t\t██╔══╝  ██║  ██║██║██║╚██╗██║██╔══██║██╔══██╗██║  ██║██║   ██║\n");
 	printf("\t\t\t\t███████╗██████╔╝██║██║ ╚████║██║  ██║██║  ██║██████╔╝╚██████╔╝\n");
 	printf("\t\t\t\t╚══════╝╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ╚═════╝\n");
+}
+// isso vai ser usado em todos os menus de 1 ate 5 numeros...
+int escolha(){
+	int i,c;
+	scanf("%i",&i);
+	// aqui existe um bug entao por favor não digite nenhuma letra...
+	while (i != 1 && i != 2 && i != 3 && i != 4 && i != 5){
+		printf("Digite um numero correspondente: ");
+		scanf("%i",&i);
+		c++;
+		if(c  >  3 && i != 1 && i != 2 && i != 3 && i != 4 && i != 5)
+			printf("\n\n\t\t nao há Easter Eggs por aqui\n\n");
+	}
+	return i;
 }
 
 /*
