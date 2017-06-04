@@ -38,22 +38,26 @@ void dificuldades(){
 	printf("\t\t  ╔═╗╔═╗╔═╗╔═╗╦  ╦ ╦╔═╗  ╔═╗  ╔╦╗╦╔═╗╦╔═╗╦ ╦╦  ╔╦╗╔═╗╔╦╗╔═╗\n");
 	printf("\t\t  ║╣ ╚═╗║  ║ ║║  ╠═╣╠═╣  ╠═╣   ║║║╠╣ ║║  ║ ║║   ║║╠═╣ ║║║╣ \n");
 	printf("\t\t  ╚═╝╚═╝╚═╝╚═╝╩═╝╩ ╩╩ ╩  ╩ ╩  ═╩╝╩╚  ╩╚═╝╚═╝╩═╝═╩╝╩ ╩═╩╝╚═╝\n");
-	printf("\t\t");
+	printf("\n\n");
 	printf("\t\t\t\t  ┬     ┌┬┐┌─┐  ┌─┐┬  ┬ ┬┌─┐  ┌─┐┌─┐┌─┐┬ ┬┌─┐┌┬┐┌─┐\n");
 	printf("\t\t\t\t  │ ───  ││├┤   │ ││  ├─┤│ │  ├┤ ├┤ │  ├─┤├─┤ │││ │\n");
 	printf("\t\t\t\t  ┴     ─┴┘└─┘  └─┘┴─┘┴ ┴└─┘  └  └─┘└─┘┴ ┴┴ ┴─┴┘└─┘\n");
-	printf("\t\t\t\t ──┐     ┌─┐┌─┐┌─┐┬┬ \n");  
-	printf("\t\t\t\t ┌─┘───  ├┤ ├─┤│  ││ \n");
-	printf("\t\t\t\t └──     └  ┴ ┴└─┘┴┴─┘\n");
-	printf("\t\t\t\t ──┐     ┌┬┐┌─┐┌┬┐┬┌─┐\n");
-	printf("\t\t\t\t ──┤───  │││├┤  ││││ │\n");
-	printf("\t\t\t\t ──┘     ┴ ┴└─┘─┴┘┴└─┘\n");
-	printf("\t\t\t\t│  │     ┌┬┐┬┌─┐┬┌─┐┬┬\n");
-	printf("\t\t\t\t└──┤───   │││├┤ ││  ││\n");
-	printf("\t\t\t\t   │     ─┴┘┴└  ┴└─┘┴┴─┘\n");
-	printf("\t\t\t\t┌───     ┬─┐┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐\n");
-	printf("\t\t\t\t└──┐───  ├┬┘├─┤├─┘├─┤┌─┘┌─┘┌─┘\n");
-	printf("\t\t\t\t───┘     ┴└─┴ ┴┴  ┴ ┴└─┘└─┘└─┘\n");
+	printf("\t\t\t\t ──┐    ┌─┐┌─┐┌─┐┬┬ \n");  
+	printf("\t\t\t\t ┌─┘─── ├┤ ├─┤│  ││ \n");
+	printf("\t\t\t\t └──    └  ┴ ┴└─┘┴┴─┘\n");
+	printf("\t\t\t\t ──┐    ┌┬┐┌─┐┌┬┐┬┌─┐\n");
+	printf("\t\t\t\t ──┤─── │││├┤  ││││ │\n");
+	printf("\t\t\t\t ──┘    ┴ ┴└─┘─┴┘┴└─┘\n");
+	printf("\t\t\t\t│  │    ┌┬┐┬┌─┐┬┌─┐┬┬\n");
+	printf("\t\t\t\t└──┤───  │││├┤ ││  ││\n");
+	printf("\t\t\t\t   │    ─┴┘┴└  ┴└─┘┴┴─┘\n");
+	printf("\t\t\t\t┌───    ┬─┐┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐\n");
+	printf("\t\t\t\t└──┐─── ├┬┘├─┤├─┘├─┤┌─┘┌─┘┌─┘\n");
+	printf("\t\t\t\t───┘    ┴└─┴ ┴┴  ┴ ┴└─┘└─┘└─┘\n");
+	printf("\t\t\t\t┌──┐    ┌─┐┌─┐┬─┐┌─┐  ┬  ┬┌─┐┬ ┌┬┐┌─┐┬─┐\n");  
+	printf("\t\t\t\t│  │─── ├─┘├─┤├┬┘├─┤  └┐┌┘│ ││  │ ├─┤├┬┘\n");
+	printf("\t\t\t\t└──┘    ┴  ┴ ┴┴└─┴ ┴   └┘ └─┘┴─┘┴ ┴ ┴┴└─\n");
+	printf("\n\n");
 }
 
 void loading(){
@@ -108,6 +112,20 @@ int escolha(){
 	scanf("%i",&i);
 	// aqui existe um bug entao por favor não digite nenhuma letra...
 	while (i != 1 && i != 2 && i != 3 && i != 4 && i != 5){
+		printf("Digite um numero correspondente: ");
+		scanf("%i",&i);
+		c++;
+		if(c  >  3 && i != 1 && i != 2 && i != 3 && i != 4 && i != 5)
+			printf("\n\n\t\t nao há Easter Eggs por aqui\n\n");
+	}
+	return i;
+}
+
+int escolha2(){
+	int i,c;
+	scanf("%i",&i);
+	// aqui existe um bug entao por favor não digite nenhuma letra...
+	while (i != 0 && i != 1 && i != 2 && i != 3 && i != 4 && i != 5){
 		printf("Digite um numero correspondente: ");
 		scanf("%i",&i);
 		c++;
