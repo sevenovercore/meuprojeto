@@ -31,7 +31,9 @@ int main(){
 	
 	char a[10];
 	srand(time(NULL));
-	int f[6][6],m[9][9],d[12][12];
+	int f[6][6],m[9][9],d[12][12],colocar[9][9];
+	//char sudok[10]="sudokuf";
+	//sudok[7]=rand()%25;
 	int cont;
 	entrada();
 	menu();
@@ -56,7 +58,45 @@ int main(){
 				menu();
 				v=escolha();
 			}
-				
+			if (v2 == 1){
+			// falta o banco de dados de athirson exatamente aqui ...
+				arquivo = fopen("sudoku.txt","rt");
+					fscanf(arquivo,"%s\n",&a);
+					for(int i=0;i<6;i++){
+						for(int j=0;j<6;j++){
+							fscanf(arquivo,"%i ",&f[i][j]);
+						}
+					}
+					while(strcmp(a,"sudoku1")!=0){
+						fscanf(arquivo,"%s\n",&a);
+						for(int i=0;i<6;i++){
+							for(int j=0;j<6;j++){
+								fscanf(arquivo,"%i ",&f[i][j]);
+							}
+						}
+					}	
+			}
+			if (v2 == 2 || v2 == 3 || v2 == 3 || v2 == 5){
+				//char sudok[10]="sudoku";
+				//sudok[6]=rand()%25;
+				arquivo = fopen("sudoku.txt","rt");
+					fscanf(arquivo,"%s\n",&a);
+					for(int i=0;i<9;i++){
+						for(int j=0;j<9;j++){
+							fscanf(arquivo,"%i ",&m[i][j]);
+						}
+					}
+					while(strcmp(a,"sudoku2")!=0){
+						fscanf(arquivo,"%s\n",&a);
+						for(int i=0;i<9;i++){
+							for(int j=0;j<9;j++){
+								fscanf(arquivo,"%i ",&m[i][j]);
+							}
+						}
+					}
+				layout();
+					
+			}
 		}
 		if(v == 3){
 			FILE* arquivo2;
