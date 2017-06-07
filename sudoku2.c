@@ -65,6 +65,7 @@ void dificuldades(){
 }
 
 void tutorial(){
+	printf("\n");
 	printf("\t\t████████╗██╗   ██╗████████╗ ██████╗ ██████╗ ██╗ █████╗ ██╗ 	\n");    
 	printf("\t\t╚══██╔══╝██║   ██║╚══██╔══╝██╔═══██╗██╔══██╗██║██╔══██╗██║      \n");
 	printf("\t\t   ██║   ██║   ██║   ██║   ██║   ██║██████╔╝██║███████║██║     	\n");
@@ -73,7 +74,8 @@ void tutorial(){
 	printf("\t\t   ╚═╝    ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚══════╝	\n");
                                                               
 	printf("\n");
-	
+	printf("\t\tAs dificuldades funcionam de forma aleatoria de acordo com um numero.\n\t\tentao as vezes a dificuldade facil pode ter menos numeros que a dificil mas a facil tem mais chances de ter mais numeros");
+	printf("\n\n");
 	printf("\t\t-----> tutorial para os niveis facil, medio, dificil e rapazzz: \n");
 	printf("\t\t* - o sudoku e uma tabela que deve ser preenchida por numeros de 1 a 9\n");
 	printf("\t\t* - o sudoku nao deve ter numeros repitidos na mesma linha e nem na mesma coluna\n");
@@ -86,6 +88,7 @@ void tutorial(){
 }
 
 void creditos(){
+	printf("\n\n");
 	printf("\t\t\t\t███╗   ███╗ █████╗ ████████╗███████╗██╗   ██╗███████╗\n");
 	printf("\t\t\t\t████╗ ████║██╔══██╗╚══██╔══╝██╔════╝██║   ██║██╔════╝\n");
 	printf("\t\t\t\t██╔████╔██║███████║   ██║   █████╗  ██║   ██║███████╗\n");
@@ -118,7 +121,10 @@ void layout(int x,int y,int m[x][y]){
 		}
 		printf("\n");
 		for(int j =0;j<9;j++){
-			printf(" │%i│ ",m[i][j]);
+			if(m[i][j] != 0)
+				printf(" │%i│ ",m[i][j]);
+			else
+				printf(" │ │ ");
 			if(j == 2 || j == 5)
 				printf("│");
 		}
@@ -128,52 +134,25 @@ void layout(int x,int y,int m[x][y]){
 			if(j == 2 || j == 5)
 				printf("│");
 		}
-		printf("\n");
+		if (i == 2 || i == 5)
+			printf("\n");
+			
 		if (i == 2 || i == 5){
-			for(int j =0;j<9;j++){
-			printf("─────");
+			for(int j =0;j<8;j++){
+			printf("──────");
 			}
 		}
 		printf("\n");
 	}
-/*
-	printf("\t\t\t┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐\n");
-	printf("\t\t\t│ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │\n");
-	printf("\t\t\t└─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘\n");
-	printf("\t\t\t┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐\n");
-	printf("\t\t\t│ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │\n");
-	printf("\t\t\t└─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘\n");
-	printf("\t\t\t┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐\n");
-	printf("\t\t\t│ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │\n");
-	printf("\t\t\t└─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘\n");
-	printf("\t\t\t──────────── ───────────── ────────────\n");
-	printf("\t\t\t┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐\n");
-	printf("\t\t\t│ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │\n");
-	printf("\t\t\t└─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘\n");
-	printf("\t\t\t┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐\n");
-	printf("\t\t\t│ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │\n");
-	printf("\t\t\t└─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘\n");
-	printf("\t\t\t┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐\n");
-	printf("\t\t\t│ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │\n");
-	printf("\t\t\t└─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘\n");
-	printf("\t\t\t──────────── ───────────── ────────────\n");
-	printf("\t\t\t┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐\n");
-	printf("\t\t\t│ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │\n");
-	printf("\t\t\t└─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘\n");
-	printf("\t\t\t┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐\n");
-	printf("\t\t\t│ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │\n");
-	printf("\t\t\t└─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘\n");
-	printf("\t\t\t┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐ │ ┌─┐ ┌─┐ ┌─┐\n");
-	printf("\t\t\t│ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │\n");
-	printf("\t\t\t└─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘ │ └─┘ └─┘ └─┘\n");
-*/
+	
+	
 }
-void jogar(){
+void jogar(int d){
 	char a[10];
 	srand(time(NULL));
 	int m[9][9],m2[9][9];
-	int cont=0,vetor[35];
-	for(int i =0;i<35;i++){
+	int cont=0,vetor[d];
+	for(int i =0;i<40;i++){
 		vetor[i]=rand()%81;
 	}
 	FILE* arquivo;
@@ -194,13 +173,42 @@ void jogar(){
 			}
 		}
 	int c,l;
-	for(int i =0;i<35;i++){
+	for(int i =0;i<d;i++){
 		c = vetor[i]/9;
 		l = vetor[i]%9;
 		m2[c][l]=m[c][l];
 	}
-	
-	layout(9,9,m2);	
+	while(1){
+		system("clear");
+		layout(9,9,m2);
+		int p,o,u;
+		int t;
+		printf("digite 1 para entrar e 0 para desistir:  ");
+		scanf("%i",&t);
+		if (t == 1){
+			printf("digite o valor da linha mas nao digite nenhuma letra pf:  ");
+				scanf("%i",&p);
+			while (p < 0 || p >8){
+				printf("digite o valor da linha mas nao digite nenhuma letra pf:  ");
+				scanf("%i",&p);
+			}
+			printf("digite o valor da coluna mas nao digite nenhuma letra pf:  ");
+				scanf("%i",&o);
+			while (o < 0 || o >8){
+				printf("digite o valor da linha mas nao digite nenhuma letra pf:  ");
+				scanf("%i",&o);
+			}
+			printf("digite o valor do numero mas nao digite nenhuma letra pf:  ");
+				scanf("%i",&u);
+			while (u < 0 || u >8){
+				printf("digite o valor da linha mas nao digite nenhuma letra pf:  ");
+				scanf("%i",&u);
+			}
+			m2[p][o]=u;
+		}else{
+			break;
+		}
+	}
 }
 void criarbase(){
 	FILE* arquivo;
@@ -239,13 +247,20 @@ void menudd(){
 			case '1':
 				break;
 			case '2':
-				jogar();
+				jogar(40);
+				dificuldades();
 				break;
 			case '3':
+				jogar(35);
+				dificuldades();
 				break;
 			case '4':
+				jogar(23);
+				dificuldades();
 				break;
 			case '5':
+				jogar(28);
+				dificuldades();
 				break;
 		}
 		scanf("%c",&s);
