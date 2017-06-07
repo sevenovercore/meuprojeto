@@ -113,16 +113,26 @@ void layout(int x,int y,int m[x][y]){
 	for(int i =0;i<9;i++){
 		for(int j =0;j<9;j++){
 			printf(" ┌─┐ ");
-			//printf("│%i│\n",m[i][j]);
-			//printf("└─┘\n");
+			if(j == 2 || j == 5)
+				printf("│");
 		}
 		printf("\n");
 		for(int j =0;j<9;j++){
 			printf(" │%i│ ",m[i][j]);
+			if(j == 2 || j == 5)
+				printf("│");
 		}
 		printf("\n");
 		for(int j =0;j<9;j++){
 			printf(" └─┘ ");
+			if(j == 2 || j == 5)
+				printf("│");
+		}
+		printf("\n");
+		if (i == 2 || i == 5){
+			for(int j =0;j<9;j++){
+			printf("─────");
+			}
 		}
 		printf("\n");
 	}

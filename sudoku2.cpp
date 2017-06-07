@@ -142,7 +142,7 @@ void layout(){
 // isso vai ser usado em todos os menus de 1 ate 5 numeros...
 int escolha(){
 	int i,c;
-	scanf("%i",&i);
+	fgets(i,1,stdin);
 	// aqui existe um bug entao por favor não digite nenhuma letra...
 	while (i != 1 && i != 2 && i != 3 && i != 4 && i != 5){
 		printf("Digite um numero correspondente: ");
@@ -156,7 +156,7 @@ int escolha(){
 
 int escolha2(){
 	int i,c;
-	scanf("%i",&i);
+	i = getchar();
 	// aqui existe um bug entao por favor não digite nenhuma letra...
 	while (i != 0 && i != 1 && i != 2 && i != 3 && i != 4 && i != 5){
 		printf("Digite um numero correspondente: ");
