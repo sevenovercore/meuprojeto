@@ -5,7 +5,8 @@
 #include <stdlib.h>
 //----------------------->> funcao que recebe do teclado a qualquer momento no programa...
 //----------------------->> esta funcao deve ser usada juntamente com a funcao kbhit 
-
+int vez=0,dif=1;
+float tempoX = 0.3;
 int getch()
 {
     struct termios oldattr, newattr;
@@ -110,6 +111,7 @@ void imprimir(int x,int y,int matriz[x][y]){
 		}
 		printf("\n");
 	}
+	printf("\n\n\t\t\t\033[34mpontos - %i\033[0m",dif);
 	
 }
 
@@ -137,7 +139,7 @@ void peca1(int x, int y,int m[x][y]){
 				m[i][15+a-1]=1;
 			}
 //----------------->> aqui sao as condicoes para mexer a peca 
-		clock_t fim= clock() + 0.3 * CLOCKS_PER_SEC;
+		clock_t fim= clock() + tempoX * CLOCKS_PER_SEC;
 		while(clock() < fim){
 					
 			if(kbhit()){
@@ -278,7 +280,7 @@ void peca2(int x, int y,int m[x][y]){
 		
 		//--------------------------->> condicoes de movimento 
 		
-		clock_t fim= clock() + 0.3 * CLOCKS_PER_SEC;
+		clock_t fim= clock() + tempoX * CLOCKS_PER_SEC;
 		while(clock() < fim){
 			if(kbhit()){
                 	char ch;
@@ -395,7 +397,7 @@ void peca3(int x,int y,int m[x][y]){
 			m[i+1][15+a+1]=1;
 	
 	// ---------------------- condicoes para movimento.
-		clock_t fim= clock() + 0.3 * CLOCKS_PER_SEC;
+		clock_t fim= clock() + tempoX * CLOCKS_PER_SEC;
 		while(clock() < fim){
 			if(kbhit()){
 	                	char ch;
@@ -439,7 +441,7 @@ void peca4(int x,int y,int m[x][y]){
 
 
 //----------------------------- aqui e onde comaca a passar cada tempo
-		clock_t fim= clock() + 0.5 * CLOCKS_PER_SEC;
+		clock_t fim= clock() + tempoX+tempoX * CLOCKS_PER_SEC;
 		while(clock() < fim){
 // -------------------------- aqui sao as opcoes de movimento da peca 
 			if(kbhit()){
@@ -466,6 +468,8 @@ void peca4(int x,int y,int m[x][y]){
 		
 		}
 		imprimir(45,30,m);
+
+//------------------------------ momento da impressao
 		if(m[i+2][15+a]==1){
 			m[i+1][15+a]=1;
 			break;
@@ -473,14 +477,121 @@ void peca4(int x,int y,int m[x][y]){
 	}
 }
 
+void peca5(int x,int y,int m[x][y]){
+	int a=0;
+	int b=0;
 
+		for(int i=0;i<45;i++){
+	// ----------------->>>>> momento em que esperasse do teclado um botão
+			if(b==0){
+				if(i>0){
+					m[i+2][15+a]=0;
+					m[i+3][15+a]=0;
+					m[i+4][15+a]=0;
+					m[i+4][15+a+1]=0;	
+				}
+				m[i+3][15+a]=1;
+				m[i+4][15+a]=1;
+				m[i+5][15+a]=1;
+				m[i+5][15+a+1]=1;
+			}
+			if(b==1){
+				if(i>0){
+					m[i][15+a]=0;
+					m[i][15+a+1]=0;
+					m[i][15+a+2]=0;
+					m[i-1][15+a+2]=0;
+				}
+				m[i+1][15+a]=1;
+				m[i+1][15+a+1]=1;
+				m[i+1][15+a+2]=1;
+				m[i][15+a+2]=1;
+			}
 
+	// ------------------->>>> condicoes para mexer para os lados 
+
+			clock_t fim= clock() + tempoX * CLOCKS_PER_SEC;
+			while(clock() < fim){
+
+				if(kbhit()){
+					char ch;
+		            ch = getch();
+					if(ch == 'l' && b==0 && (m[i+4][15+a+2]==0 && m[i+3][15+a+1]==0 && m[i+2][15+a+1]==0)){
+						m[i+3][15+a]=0;
+						m[i+4][15+a]=0;
+						m[i+5][15+a]=0;
+						m[i+5][15+a+1]=0;
+						a++;
+					}
+					if(ch == 'k' && b==0 && (m[i+2][15+a-1]==0 && m[i+3][15+a-1]==0 && m[i+4][15+a-1]==0)){
+						m[i+3][15+a]=0;
+						m[i+4][15+a]=0;
+						m[i+5][15+a]=0;
+						m[i+5][15+a+1]=0;
+						a--;
+					}
+					if(ch == 'l' && b==1 &&(m[i+1][15+a+3]==0 && m[i][15+a+3]==0)){
+						m[i+1][15+a]=0;
+						m[i+1][15+a+1]=0;
+						m[i+1][15+a+2]=0;
+						m[i][15+a+2]=0;
+						a++;
+					}
+					if(ch == 'k' && b==1 &&(m[i+1][15+a-1]==0 && m[i][15+a+1]==0 )){
+						m[i+1][15+a]=0;
+						m[i+1][15+a+1]=0;
+						m[i+1][15+a+2]=0;
+						m[i][15+a+2]=0;
+						a--;
+					}
+					if(ch == 'a'){
+							int k=0;
+						if(b==0 && m[i+2][15+a]==0 && m[i+2][15+a+1]==0 && m[i+2][15+a+2]==0 && m[i+1][15+a+2]==0){
+							k=1;
+							m[i+3][15+a]=0;
+							m[i+4][15+a]=0;
+							m[i+5][15+a]=0;
+							m[i+5][15+a+1]=0;
+							b=!b;
+						}
+						if(b==1 && k==0 && m[i+3][15+a]==0 && m[i+4][15+a]==0 && m[i+5][15+a]==0 && m[i+5][15+a+1]==0){
+							m[i+1][15+a]=0;
+							m[i+1][15+a+1]=0;
+							m[i+1][15+a+2]=0;
+							m[i][15+a+2]=0;
+							b=!b;
+						}
+					}
+				}
+			}
+	// ----------------->>> momento que a matriz é impressa 
+
+			imprimir(45,30,m);
+			
+	// -------------- >> condicoes de parada 
+
+			if(b==0 && (m[i+6][15+a]==1 || m[i+6][15+a+1]==1  )){
+				m[i+3][15+a]=1;
+				m[i+4][15+a]=1;
+				m[i+5][15+a]=1;
+				m[i+5][15+a+1]=1;
+				break;
+			}
+			if(b==1 && (m[i+2][15+a]==1 || m[i+2][15+a+1]==1 || m[i+2][15+a+2]==1 )){
+				m[i+1][15+a]=1;
+				m[i+1][15+a+1]=1;
+				m[i+1][15+a+2]=1;
+				m[i][15+a+2]=1;
+				break;
+			}	
+		}
+}
 void jogar(){
 	int matriz[45][30];
 
 	void aleatorio(){
 		srand(time(NULL));
-		int k=1+rand()%4;
+		int k=1+rand()%5;
 		switch(k){
 			case 1:
 				peca1(45,30,matriz);
@@ -493,6 +604,9 @@ void jogar(){
 				break;
 			case 4:
 				peca4(45,30,matriz);
+				break;
+			case 5:
+				peca5(45,30,matriz);
 				break;
 		}
 	}
@@ -521,6 +635,7 @@ void jogar(){
 				soma += matriz[i][j];
 			}
 			if (soma == 28){
+				dif+=5;
 				p=i;
 				for(int j=1;j<29;j++){
 					matriz[i][j]=0;
@@ -539,6 +654,30 @@ void jogar(){
 				}
 			}
 		}
+		
+		if(dif >= 30 && vez==0){
+			tempoX -= 0.1;
+			vez=1;
+		}
+		if(dif >= 80 && vez==1){
+			tempoX -= 0.1;
+			vez=2;
+		}
+		if(dif >= 250 && vez==2){
+			tempoX -= 0.03;
+			vez=3;
+		}
+		if(dif >= 250 && vez==3){
+			tempoX -= 0.02;
+			vez=4;
+		}
+		if(dif >= 550 && vez==4){
+			tempoX -= 0.02;
+			vez=5;
+		}
+
+
+		
 		for(int i =1;i<29;i++){
 			if(matriz[11][i]==1){
 				printf("voce perdeu.\n");

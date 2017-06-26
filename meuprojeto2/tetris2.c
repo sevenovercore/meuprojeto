@@ -57,17 +57,13 @@ printf("\t\t\t\t\t\t |        |   _|  |  |   _|  _  |   _|  |  _  |  |        |\
 printf("\t\t\t\t\t\t |        |____|_____|____|_____|__| |__|___._|__|        |\n");
 printf("\t\t\t\t\t\t |________________________________________________________| \n");
 printf("\n\n");
-printf(" \t\t\t ___________________________________________________________________________________________________________________\n");
-printf(" \t\t\t|-------> Digite 'K' e 'L' para esquerda e direita respectivamente. 												   |\n");
-printf(" \t\t\t|-------> Digite 'A' e 'D' para mover para esquerda e direita respectivamente.                                  	   |\n");
-printf(" \t\t\t|-------> Digite 'J' para usar o poder especial de algumas pecas...                                                 |\n");
-printf(" \t\t\t|-------> as pecas com poderes espciais sao a bomba (V) e o ponto (.) que aumenta                                   |\n");
-printf(" \t\t\t|-------> Se os objetos chegarem ao topo do quadrado voce perde.                                                    |\n");
-printf(" \t\t\t|-------> Existem 3 opcoes de niveis:                                                                               |\n");
-printf(" \t\t\t|facil-> os objetos cairao lentamente                                                                               |\n");
-printf(" \t\t\t|Medio-> os objetos cairao com mais velocidade                                                                      |\n");
-printf(" \t\t\t|Dificil-> os objetos cairao rapidamente                                                                            |\n");	
-printf(" \t\t\t|___________________________________________________________________________________________________________________|\n");
+printf(" \t\t\t __________________________________________________________________________________________________\n");
+printf(" \t\t\t|-------> Digite 'K' e 'L' para esquerda e direita respectivamente. 								  |\n");
+printf(" \t\t\t|-------> Digite 'A' e 'D' para mover para esquerda e direita respectivamente.                     |\n");
+printf(" \t\t\t|-------> Digite 'J' para usar o poder especial de algumas pecas...                                |\n");
+printf(" \t\t\t|-------> as pecas com poderes espciais sao a bomba (V) e o ponto (.) que aumenta                  |\n");
+printf(" \t\t\t|-------> Se os objetos chegarem ao topo do quadrado voce perde.                                   |\n");
+printf(" \t\t\t|__________________________________________________________________________________________________|\n");
 esperar(30);
 }
 
