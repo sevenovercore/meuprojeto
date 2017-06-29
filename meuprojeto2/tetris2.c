@@ -58,13 +58,13 @@ printf("\t\t\t\t\t\t |        |____|_____|____|_____|__| |__|___._|__|        |\
 printf("\t\t\t\t\t\t |________________________________________________________| \n");
 printf("\n\n");
 printf(" \t\t\t __________________________________________________________________________________________________\n");
-printf(" \t\t\t|-------> Digite 'K' e 'L' para esquerda e direita respectivamente. 								  |\n");
+printf(" \t\t\t|-------> Digite 'K' e 'L' para esquerda e direita respectivamente.                                |\n");
 printf(" \t\t\t|-------> Digite 'A' e 'D' para mover para esquerda e direita respectivamente.                     |\n");
 printf(" \t\t\t|-------> Digite 'J' para usar o poder especial de algumas pecas...                                |\n");
 printf(" \t\t\t|-------> as pecas com poderes espciais sao a bomba (V) e o ponto (.) que aumenta                  |\n");
 printf(" \t\t\t|-------> Se os objetos chegarem ao topo do quadrado voce perde.                                   |\n");
 printf(" \t\t\t|__________________________________________________________________________________________________|\n");
-esperar(30);
+esperar(20);
 }
 
 void emenu(){

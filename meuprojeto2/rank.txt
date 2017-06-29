@@ -1,0 +1,4 @@
+jorge 50
+bia 10
+carlos
+  6

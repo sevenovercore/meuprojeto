@@ -3,10 +3,13 @@
 #include <termios.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 //----------------------->> funcao que recebe do teclado a qualquer momento no programa...
 //----------------------->> esta funcao deve ser usada juntamente com a funcao kbhit 
 int vez=0,dif=1;
 float tempoX = 0.3;
+void salvar(char nome[25],int pontos);
+
 int getch()
 {
     struct termios oldattr, newattr;
@@ -457,6 +460,7 @@ void peca4(int x,int y,int m[x][y]){
                	}
                	if(ch == 'j'){
                			int j;
+               			imprimir(45,30,m);
                			for(j=45;m[j][15+a]!=0;j--){
                
                			}
@@ -562,6 +566,24 @@ void peca5(int x,int y,int m[x][y]){
 							b=!b;
 						}
 					}
+					if(ch == 's'){
+							int k=0;
+						if(b==0 && m[i+2][15+a]==0 && m[i+2][15+a+1]==0 && m[i+2][15+a+2]==0 && m[i+1][15+a+2]==0){
+							k=1;
+							m[i+3][15+a]=0;
+							m[i+4][15+a]=0;
+							m[i+5][15+a]=0;
+							m[i+5][15+a+1]=0;
+							b=!b;
+						}
+						if(b==1 && k==0 && m[i+3][15+a]==0 && m[i+4][15+a]==0 && m[i+5][15+a]==0 && m[i+5][15+a+1]==0){
+							m[i+1][15+a]=0;
+							m[i+1][15+a+1]=0;
+							m[i+1][15+a+2]=0;
+							m[i][15+a+2]=0;
+							b=!b;
+						}
+					}
 				}
 			}
 	// ----------------->>> momento que a matriz é impressa 
@@ -586,12 +608,241 @@ void peca5(int x,int y,int m[x][y]){
 			}	
 		}
 }
+
+void peca6(int x,int y,int m[x][y]){
+	int a=0;
+	for(int i=0;i<45;i++){
+		//----------------para imprimir a peca
+			if(i>0){
+				m[i-1][15+a]=0;
+				m[i][15+a]=0;
+				m[i][15+a-1]=0;
+				m[i][15+a+1]=0;
+				m[i+1][15+a]=0;		
+			}
+			m[i][15+a]=1;
+			m[i+1][15+a]=1;
+			m[i+1][15+a-1]=1;
+			m[i+1][15+a+1]=1;
+			m[i+2][15+a]=1;
+	
+	// ---------------------- condicoes para movimento.
+		clock_t fim= clock() + tempoX * CLOCKS_PER_SEC;
+		while(clock() < fim){
+			if(kbhit()){
+	                	char ch;
+	                	ch = getch();
+	                	if(ch == 'l' && m[i][15+a+1]==0 && m[i+2][15+a+1]==0 && m[i+1][15+a+2]==0){
+	                		m[i][15+a]=0;
+							m[i+1][15+a]=0;
+							m[i+1][15+a-1]=0;
+							m[i+1][15+a+1]=0;
+							m[i+2][15+a]=0;
+	                		a++;
+	                	}
+	                	if(ch == 'k' && m[i][15+a-1]==0 && m[i+2][15+a-1]==0 && m[i+1][15+a-2]==0){
+	                		m[i][15+a]=0;
+							m[i+1][15+a]=0;
+							m[i+1][15+a-1]=0;
+							m[i+1][15+a+1]=0;
+							m[i+2][15+a]=0;
+	                		a--;
+	                	}
+	        }
+		}
+		imprimir(45,30,m);
+
+	//--------------------------->> condicoes de parada
+		if (m[i+3][15+a]==1 || m[i+2][15+a-1]==1 || m[i+2][15+a+1]==1){
+			m[i][15+a]=1;
+			m[i+1][15+a]=1;
+			m[i+1][15+a-1]=1;
+			m[i+1][15+a+1]=1;
+			m[i+2][15+a]=1;	
+			break;
+		}
+	}
+}
+
+void peca7(int x,int y,int m[x][y]){
+	int a=0;
+	for(int i=0;i<45;i++){
+		//----------------para imprimir a peca
+			if(i>0){
+				m[i-1][15+a-1]=0;
+				m[i-1][15+a+2]=0;
+				m[i][15+a]=0;
+				m[i][15+a+1]=0;	
+				m[i+1][15+a]=0;
+				m[i+1][15+a+1]=0;		
+			}
+			m[i][15+a-1]=1;
+			m[i][15+a+2]=1;
+			m[i+1][15+a]=1;
+			m[i+1][15+a+1]=1;	
+			m[i+2][15+a]=1;
+			m[i+2][15+a+1]=1;
+	
+	// ---------------------- condicoes para movimento.
+		clock_t fim= clock() + tempoX * CLOCKS_PER_SEC;
+		while(clock() < fim){
+			if(kbhit()){
+	                	char ch;
+	                	ch = getch();
+	                	if(ch == 'l' && m[i+2][15+a+2]==0 && m[i+1][15+a+2]==0 && m[i][15+a+3]==0){
+	                		m[i][15+a-1]=0;
+							m[i][15+a+2]=0;
+	                		m[i+1][15+a]=0;
+							m[i+1][15+a+1]=0;	
+							m[i+2][15+a]=0;
+							m[i+2][15+a+1]=0;
+	                		a++;
+	                	}
+	                	if(ch == 'k' && m[i+2][15+a-1]==0 && m[i+1][15+a-1]==0 && m[i][15+a-2]==0){
+	                		m[i][15+a-1]=0;
+							m[i][15+a+2]=0;
+	                		m[i+1][15+a]=0;
+							m[i+1][15+a+1]=0;	
+							m[i+2][15+a]=0;
+							m[i+2][15+a+1]=0;
+	                		a--;
+	                	}
+	        }
+		}
+		imprimir(45,30,m);
+
+	//--------------------------->> condicoes de parada
+		if (m[i+3][15+a]==1 || m[i+3][15+a+1]==1){	
+			if(a == 11){
+				m[i][15+a]=0;
+				m[i][15+a+1]=0;
+				m[i][15+a-1]=0;
+				m[i][15+a+2]=0;
+				m[i+1][15+a]=0;
+				m[i+1][15+a+1]=0;
+				m[i+1][15+a-1]=0;
+				m[i+1][15+a+2]=0;	
+				m[i+2][15+a]=0;
+				m[i+2][15+a+1]=0;
+				m[i+2][15+a-1]=0;
+				m[i+2][15+a+2]=0;
+				m[i+3][15+a]=0;
+				m[i+3][15+a+1]=0;
+				m[i+3][15+a-1]=0;
+				m[i+3][15+a+2]=0;
+				m[i][15+a-2]=0;
+				m[i+1][15+a-2]=0;
+				m[i+2][15+a-2]=0;
+				m[i+3][15+a-2]=0;
+			}
+			if(a == -13){
+				m[i][15+a]=0;
+				m[i][15+a+1]=0;
+				m[i][15+a-1]=0;
+				m[i][15+a+2]=0;
+				m[i+1][15+a]=0;
+				m[i+1][15+a+1]=0;
+				m[i+1][15+a-1]=0;
+				m[i+1][15+a+2]=0;	
+				m[i+2][15+a]=0;
+				m[i+2][15+a+1]=0;
+				m[i+2][15+a-1]=0;
+				m[i+2][15+a+2]=0;
+				m[i+3][15+a]=0;
+				m[i+3][15+a+1]=0;
+				m[i+3][15+a-1]=0;
+				m[i+3][15+a+2]=0;
+				m[i][15+a+3]=0;
+				m[i+1][15+a+3]=0;
+				m[i+2][15+a+3]=0;
+				m[i+3][15+a+3]=0;
+			}
+			if(a != -13 && a != 11 && i+3 == 44){
+				m[i][15+a]=0;
+				m[i][15+a+1]=0;
+				m[i][15+a-1]=0;
+				m[i][15+a+2]=0;
+				m[i+1][15+a]=0;
+				m[i+1][15+a+1]=0;
+				m[i+1][15+a-1]=0;
+				m[i+1][15+a+2]=0;	
+				m[i+2][15+a]=0;
+				m[i+2][15+a+1]=0;
+				m[i+2][15+a-1]=0;
+				m[i+2][15+a+2]=0;
+				m[i][15+a+3]=0;
+				m[i+1][15+a+3]=0;
+				m[i+2][15+a+3]=0;
+				m[i][15+a+4]=0;
+				m[i+1][15+a+4]=0;
+				m[i+2][15+a+4]=0;
+				m[i][15+a-3]=0;
+				m[i+1][15+a-3]=0;
+				m[i+2][15+a-3]=0;
+				m[43][0]=1;
+				m[42][0]=1;
+				m[41][0]=1;
+				m[43][29]=1;
+				m[42][29]=1;
+				m[41][29]=1;
+			}
+			if(a > -13 && a < 11 && i+3 < 43){
+				m[i][15+a]=0;
+				m[i][15+a+1]=0;
+				m[i][15+a-1]=0;
+				m[i][15+a+2]=0;
+				m[i+1][15+a]=0;
+				m[i+1][15+a+1]=0;
+				m[i+1][15+a-1]=0;
+				m[i+1][15+a+2]=0;	
+				m[i+2][15+a]=0;
+				m[i+2][15+a+1]=0;
+				m[i+2][15+a-1]=0;
+				m[i+2][15+a+2]=0;
+				m[i][15+a+3]=0;
+				m[i+1][15+a+3]=0;
+				m[i+2][15+a+3]=0;
+				m[i][15+a+4]=0;
+				m[i+1][15+a+4]=0;
+				m[i+2][15+a+4]=0;
+				m[i][15+a-3]=0;
+				m[i+1][15+a-3]=0;
+				m[i+2][15+a-3]=0;
+				m[i+3][15+a-3]=0;
+				m[i+3][15+a-2]=0;
+				m[i+3][15+a-1]=0;
+				m[i+3][15+a]=0;
+				m[i+3][15+a+1]=0;
+				m[i+3][15+a+2]=0;
+				m[i+3][15+a+3]=0;
+				m[i+3][15+a+4]=0;
+				m[i+4][15+a-3]=0;
+				m[i+4][15+a-2]=0;
+				m[i+4][15+a-1]=0;
+				m[i+4][15+a]=0;
+				m[i+4][15+a+1]=0;
+				m[i+4][15+a+2]=0;
+				m[i+4][15+a+3]=0;
+				m[i+4][15+a+4]=0;
+			}
+			for(int j=0;j<30;j++){
+				if(m[44][j]==0)
+					m[44][j]=1;
+			}
+			break;
+		}
+	}	
+}
+
 void jogar(){
+	system("audacious -H musica.xm &");
+	system("clear");
+	
 	int matriz[45][30];
 
 	void aleatorio(){
 		srand(time(NULL));
-		int k=1+rand()%5;
+		int k=1+rand()%7;
 		switch(k){
 			case 1:
 				peca1(45,30,matriz);
@@ -607,6 +858,12 @@ void jogar(){
 				break;
 			case 5:
 				peca5(45,30,matriz);
+				break;
+			case 6:
+				peca6(45,30,matriz);
+				break;
+			case 7:
+				peca7(45,30,matriz);
 				break;
 		}
 	}
@@ -628,6 +885,7 @@ void jogar(){
 	int soma=0,cout=1;
 	while(cout){
 		aleatorio();
+		//peca7(45,30,matriz);
 		for(int i =0;i<44;i++){
 			int p=0;
 			int soma=0;
@@ -667,7 +925,7 @@ void jogar(){
 			tempoX -= 0.03;
 			vez=3;
 		}
-		if(dif >= 250 && vez==3){
+		if(dif >= 350 && vez==3){
 			tempoX -= 0.02;
 			vez=4;
 		}
@@ -679,8 +937,15 @@ void jogar(){
 
 		
 		for(int i =1;i<29;i++){
-			if(matriz[11][i]==1){
-				printf("voce perdeu.\n");
+			if(matriz[6][i]==1){
+				printf("\n\t\t\tvoce perdeu.\n");
+				char nome[25];
+				fgets(nome,25,stdin);
+				nome[strlen(nome)]=' ';
+				// aqui nesse momento vamos chamar um arquivo e colocar os ponto que tem como variavel dif no rank.
+				salvar(nome, dif);
+				vez=0,dif=0;
+				system("pkill audacious");
 				esperar(5);
 				cout=0;
 				break;
@@ -691,4 +956,41 @@ void jogar(){
 	
 }
 
-
+void salvar(char nome[],int pontos){
+	FILE* arquivo;
+	arquivo = fopen("rank.txt","r");
+	if(arquivo == NULL)
+		printf("deu error, pare de tentar bugar o programa");
+	else{
+		char pos1[25],pos2[25],pos3[25];
+		int pontos1,pontos2,pontos3;
+		fscanf(arquivo,"%s %i",&pos1,&pontos1);
+		fscanf(arquivo,"%s %i",&pos2,&pontos2);
+		fscanf(arquivo,"%s %i",&pos3,&pontos3);
+		int contador=0;
+		if(pontos > pontos1){
+			fclose(arquivo);
+			arquivo = fopen("rank.txt","w");
+			fprintf(arquivo,"%s %i\n",nome,pontos);
+			fprintf(arquivo,"%s %i\n",pos1,pontos1);
+			fprintf(arquivo,"%s %i\n",pos2,pontos2);
+			contador=1;
+		}
+		if(pontos > pontos2 && contador != 1){
+			fclose(arquivo);
+			arquivo = fopen("rank.txt","w");
+			fprintf(arquivo,"%s %i\n",pos1,pontos1);
+			fprintf(arquivo,"%s %i\n",nome,pontos);
+			fprintf(arquivo,"%s %i\n",pos2,pontos2);
+			contador=1;
+		}
+		if(pontos > pontos3 && contador != 1){
+			fclose(arquivo);
+			arquivo = fopen("rank.txt","w");
+			fprintf(arquivo,"%s %i\n",pos1,pontos1);
+			fprintf(arquivo,"%s %i\n",pos2,pontos2);
+			fprintf(arquivo,"%s %i\n",nome,pontos);
+		}
+	}
+	fclose(arquivo);
+}
