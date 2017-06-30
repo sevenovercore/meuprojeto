@@ -712,7 +712,7 @@ void peca7(int x,int y,int m[x][y]){
 		imprimir(45,30,m);
 
 	//--------------------------->> condicoes de parada
-		if (m[i+3][15+a]==1 || m[i+3][15+a+1]==1){	
+		if (m[i+3][15+a]==1 || m[i+3][15+a+1]==1 || m[i+1][15+a-1]==1 || m[i+1][15+a+2]==1 ){	
 			if(a == 11){
 				m[i][15+a]=0;
 				m[i][15+a+1]=0;
@@ -757,7 +757,7 @@ void peca7(int x,int y,int m[x][y]){
 				m[i+2][15+a+3]=0;
 				m[i+3][15+a+3]=0;
 			}
-			if(a != -13 && a != 11 && i+3 == 44){
+			if(a != -13 && a != 11 && i+3 >= 43){
 				m[i][15+a]=0;
 				m[i][15+a+1]=0;
 				m[i][15+a-1]=0;
@@ -791,23 +791,26 @@ void peca7(int x,int y,int m[x][y]){
 				m[i][15+a+1]=0;
 				m[i][15+a-1]=0;
 				m[i][15+a+2]=0;
+				m[i][15+a-2]=0;
+				m[i][15+a+4]=0;
+				m[i][15+a+3]=0;
+				m[i][15+a-3]=0;
+				m[i+1][15+a-2]=0;	
+				m[i+1][15+a-3]=0;
 				m[i+1][15+a]=0;
 				m[i+1][15+a+1]=0;
 				m[i+1][15+a-1]=0;
 				m[i+1][15+a+2]=0;	
+				m[i+1][15+a+3]=0;
+				m[i+1][15+a+4]=0;
 				m[i+2][15+a]=0;
 				m[i+2][15+a+1]=0;
 				m[i+2][15+a-1]=0;
+				m[i+2][15+a-2]=0;
 				m[i+2][15+a+2]=0;
-				m[i][15+a+3]=0;
-				m[i+1][15+a+3]=0;
-				m[i+2][15+a+3]=0;
-				m[i][15+a+4]=0;
-				m[i+1][15+a+4]=0;
-				m[i+2][15+a+4]=0;
-				m[i][15+a-3]=0;
-				m[i+1][15+a-3]=0;
 				m[i+2][15+a-3]=0;
+				m[i+2][15+a+3]=0;
+				m[i+2][15+a+4]=0;
 				m[i+3][15+a-3]=0;
 				m[i+3][15+a-2]=0;
 				m[i+3][15+a-1]=0;
@@ -828,6 +831,12 @@ void peca7(int x,int y,int m[x][y]){
 			for(int j=0;j<30;j++){
 				if(m[44][j]==0)
 					m[44][j]=1;
+			}
+			for(int j=0;j<45;j++){
+				if(m[j][0]==0)
+					m[j][0]=1;
+				if(m[j][29]==0)
+					m[j][29]=1;
 			}
 			break;
 		}
@@ -913,23 +922,23 @@ void jogar(){
 			}
 		}
 		
-		if(dif >= 30 && vez==0){
+		if(dif >= 20 && vez==0){
 			tempoX -= 0.1;
 			vez=1;
 		}
-		if(dif >= 80 && vez==1){
+		if(dif >= 60 && vez==1){
 			tempoX -= 0.1;
 			vez=2;
 		}
-		if(dif >= 250 && vez==2){
+		if(dif >= 100 && vez==2){
 			tempoX -= 0.03;
 			vez=3;
 		}
-		if(dif >= 350 && vez==3){
+		if(dif >= 180 && vez==3){
 			tempoX -= 0.02;
 			vez=4;
 		}
-		if(dif >= 550 && vez==4){
+		if(dif >= 250 && vez==4){
 			tempoX -= 0.02;
 			vez=5;
 		}
@@ -939,14 +948,13 @@ void jogar(){
 		for(int i =1;i<29;i++){
 			if(matriz[6][i]==1){
 				printf("\n\t\t\tvoce perdeu.\n");
+				system("pkill audacious");
 				char nome[25];
+				printf("\n\tdigite seu nome para tentar o rank:\n");
 				fgets(nome,25,stdin);
-				nome[strlen(nome)]=' ';
-				// aqui nesse momento vamos chamar um arquivo e colocar os ponto que tem como variavel dif no rank.
 				salvar(nome, dif);
 				vez=0,dif=0;
-				system("pkill audacious");
-				esperar(5);
+				esperar(2);
 				cout=0;
 				break;
 			}
@@ -964,33 +972,55 @@ void salvar(char nome[],int pontos){
 	else{
 		char pos1[25],pos2[25],pos3[25];
 		int pontos1,pontos2,pontos3;
-		fscanf(arquivo,"%s %i",&pos1,&pontos1);
-		fscanf(arquivo,"%s %i",&pos2,&pontos2);
-		fscanf(arquivo,"%s %i",&pos3,&pontos3);
+		fscanf(arquivo,"%s\n%i\n",&pos1,&pontos1);
+		fscanf(arquivo,"%s\n%i\n",&pos2,&pontos2);
+		fscanf(arquivo,"%s\n%i\n",&pos3,&pontos3);
 		int contador=0;
 		if(pontos > pontos1){
 			fclose(arquivo);
 			arquivo = fopen("rank.txt","w");
-			fprintf(arquivo,"%s %i\n",nome,pontos);
-			fprintf(arquivo,"%s %i\n",pos1,pontos1);
-			fprintf(arquivo,"%s %i\n",pos2,pontos2);
+			fprintf(arquivo,"%s%i\n",nome,pontos);
+			fprintf(arquivo,"%s\n%i\n",pos1,pontos1);
+			fprintf(arquivo,"%s\n%i\n",pos2,pontos2);
 			contador=1;
 		}
 		if(pontos > pontos2 && contador != 1){
 			fclose(arquivo);
 			arquivo = fopen("rank.txt","w");
-			fprintf(arquivo,"%s %i\n",pos1,pontos1);
-			fprintf(arquivo,"%s %i\n",nome,pontos);
-			fprintf(arquivo,"%s %i\n",pos2,pontos2);
+			fprintf(arquivo,"%s\n%i\n",pos1,pontos1);
+			fprintf(arquivo,"%s%i\n",nome,pontos);
+			fprintf(arquivo,"%s\n%i\n",pos2,pontos2);
 			contador=1;
 		}
 		if(pontos > pontos3 && contador != 1){
 			fclose(arquivo);
 			arquivo = fopen("rank.txt","w");
-			fprintf(arquivo,"%s %i\n",pos1,pontos1);
-			fprintf(arquivo,"%s %i\n",pos2,pontos2);
-			fprintf(arquivo,"%s %i\n",nome,pontos);
+			fprintf(arquivo,"%s\n%i\n",pos1,pontos1);
+			fprintf(arquivo,"%s\n%i\n",pos2,pontos2);
+			fprintf(arquivo,"%s%i\n",nome,pontos);
 		}
+	}
+	fclose(arquivo);
+}
+
+// ainda falta deixar o rank mais bonito..
+
+void rank(){
+	FILE* arquivo;
+	arquivo = fopen("rank.txt","r");
+	if(arquivo == NULL)
+		printf("deu error, pare de tentar bugar o programa");
+	else{
+		char pos1[25],pos2[25],pos3[25];
+		int pontos1,pontos2,pontos3;
+		fscanf(arquivo,"%s\n%i\n",&pos1,&pontos1);
+		fscanf(arquivo,"%s\n%i\n",&pos2,&pontos2);
+		fscanf(arquivo,"%s\n%i\n",&pos3,&pontos3);
+		printf("\t\t\t\t\t_____________________________________\n\n");
+		printf("\t\t\t\t\t\t\t%s - %i\n\n\n",pos1,pontos1);
+		printf("\t\t\t\t\t\t\t%s - %i\n\n\n",pos2,pontos2);
+		printf("\t\t\t\t\t\t\t%s - %i\n\n\n",pos3,pontos3);
+		printf("\t\t\t\t\t_____________________________________\n");
 	}
 	fclose(arquivo);
 }

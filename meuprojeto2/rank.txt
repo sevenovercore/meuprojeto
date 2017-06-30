@@ -1,4 +1,6 @@
-jorge 50
-bia 10
-carlos
-  6
+bia
+1000
+player2
+211
+mateus
+120
